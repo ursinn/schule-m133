@@ -27,6 +27,7 @@
  */
 
 session_start();
+include 'fallbeispiel_artikel.inc.php';
 ?>
 <!doctype html>
 <html lang="en">
@@ -35,26 +36,51 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sessiondaten und Session löschen</title>
+    <title>Ihr Warenkorb</title>
 </head>
 <body>
-<h1>Sessiondaten und Session löschen</h1>
+<hl>Ihr Warenkorb</hl>
 <?php
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-unset($_SESSION['vorname']);
-echo "<pre>";
-print_r($_SESSION);
-echo "</pre>";
-$_SESSION = array();
-print_r($_SESSION);
-echo "<p>Die Session mit der ID" . session_id() . " wurde ";
-if (session_destroy()) {
-    echo "erfolgreich gelöscht.";
-} else {
-    echo "nicht gelöscht.";
+if (isset($_POST["schoko"]) or isset($_POST["praline"])) {
+    while (list ($key, $value) = each($_POST)) {
+        if ($value >= 1) {
+            $_SESSION[$key] = floor($value);
+        } else {
+            if (isset($_SESSION[$key])) {
+                unset($_SESSION[$key]);
+            }
+        }
+    }
 }
+echo "<table border='l'>";
+echo "<tr>";
+echo "<th>Art.-Nr.</th>";
+echo "<th>Artikel</th>";
+echo "<th>Menge</th>";
+echo "</tr>";
+while (list($key, $value) = each($_SESSION)) {
+    if (substr($key, 0, 1) == "s") {
+        echo "<tr>";
+        echo "<td>$key</td>";
+        echo "<td>$schoko_feld[$key]</td>";
+        echo "<td>$value</td>";
+        echo "</tr>";
+    }
+    if (substr($key, 0, 1) == "p") {
+        echo "<tr>";
+        echo "<td>$key</td>";
+        echo "<td>$praline_feld[$key]</td>";
+        echo "<td>$value</td>";
+        echo "</tr>";
+    }
+}
+echo "</table>";
 ?>
+<p>Was möchten Sie tun?</p>
+<ul>
+    <li><a href="fallbeispiel_form-schoko.php">Schokolade bestellen</a></li>
+    <li><a href="fallbeispiel_form-praline.php">Pralinen bestellen</a></li>
+    <li><a href="fallbeispiel_kasse.php">Bestellung abschließen</a></li>
+</ul>
 </body>
 </html>
