@@ -38,6 +38,22 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-//
+<h1>Übung: Honigbestellung</h1>
+<p>Bitte geben Sie die Bestellmenge an (Einheit: 500-g-Glas):</p>
+<form action="u_bestellung.php" method="post">
+    <label for="honig1">Akazienhonig</label>
+    <input type="number" name="honig1" id="honig1">
+    <br>
+    <label for="honig2">Heidehonig</label>
+    <input type="number" name="honig2" id="honig2">
+    <br>
+    <label for="honig3">Kleehonig</label>
+    <input type="number" name="honig3" id="honig3">
+    <br>
+    <label for="honig4">Tannenhonig</label>
+    <input type="number" name="honig4" id="honig4">
+    <br>
+    <input type="submit" name="send">
+</form>
 </body>
 </html>

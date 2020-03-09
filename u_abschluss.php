@@ -38,6 +38,55 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-//
+<?php
+if (!isset($_POST['send'])) {
+    ?>
+    <h1>Honigbestellung - Abschluss</h1>
+    <p>Bitte geben Sie noch Ihre Kontaktdaten ein:</p>
+    <form action="u_abschluss.php" method="post">
+        <label for="vorname">Vorname: </label>
+        <input type="text" name="vorname" id="vorname">
+        <br>
+        <label for="nachname">Nachname: </label>
+        <input type="text" name="nachname" id="nachname">
+        <br>
+        <label for="ort">Wohnort: </label>
+        <input type="text" name="ort" id="ort">
+        <br>
+        <label for="email">Mailadresse: </label>
+        <input type="email" name="email" id="email">
+        <br>
+        <input type="submit" name="send">
+    </form>
+    <?php
+} else {
+    echo "Dies sind die in der Session gesammelten Daten: <br>";
+    if (!empty($_SESSION['honig1'])) {
+        echo "Akazienhonig: " . $_SESSION['honig1'] . "<br>";
+    }
+    if (!empty($_SESSION['honig2'])) {
+        echo "Heidehonig: " . $_SESSION['honig2'] . "<br>";
+    }
+    if (!empty($_SESSION['honig3'])) {
+        echo "Kleehonig: " . $_SESSION['honig3'] . "<br>";
+    }
+    if (!empty($_SESSION['honig4'])) {
+        echo "Tannenhonig: " . $_SESSION['honig4'] . "<br>";
+    }
+    echo "Vorname: " . $_POST['vorname'];
+    echo "<br>";
+    echo "Nachname: " . $_POST['nachname'];
+    echo "<br>";
+    echo "Wohnort: " . $_POST['ort'];
+    echo "<br>";
+    echo "Mailadresse: " . $_POST['email'];
+    echo "<br>";
+
+    $_SESSION = array();
+    session_destroy();
+
+    echo "<p>Damit ist die Session beendet <a href='u_formular.php'>Klicken Sie hier</a> um eine neue Session zu beginnen</p>";
+}
+?>
 </body>
 </html>

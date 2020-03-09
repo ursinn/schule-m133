@@ -38,6 +38,29 @@ session_start();
     <title>Document</title>
 </head>
 <body>
-//
+<h1>Honigbestellung</h1>
+<p>Sie haben folgende Mengen bestellt:</p>
+<?php
+if (isset($_POST['send'])) {
+    if (!empty($_POST['honig1'])) {
+        echo "Akazienhonig: " . $_POST['honig1'] . " Gläser <br>";
+        $_SESSION['honig1'] = $_POST['honig1'];
+    }
+    if (!empty($_POST['honig2'])) {
+        echo "Heidehonig: " . $_POST['honig2'] . " Gläser <br>";
+        $_SESSION['honig2'] = $_POST['honig2'];
+    }
+    if (!empty($_POST['honig3'])) {
+        echo "Kleehonig: " . $_POST['honig3'] . " Gläser <br>";
+        $_SESSION['honig3'] = $_POST['honig3'];
+    }
+    if (!empty($_POST['honig4'])) {
+        echo "Tannenhonig: " . $_POST['honig4'] . " Gläser <br>";
+        $_SESSION['honig4'] = $_POST['honig4'];
+    }
+}
+echo "<p>Die Session-ID lautet: " . session_id();
+?>
+<p><a href="u_abschluss.php">Weiter zur Eingabe persönlicher Daten</a> und dem Abschluss der Bestellung.</p>
 </body>
 </html>
